@@ -3,9 +3,11 @@ package com.example.rest.Rest.web.controller.v1;
 import com.example.rest.Rest.mapper.UserMapper;
 import com.example.rest.Rest.model.User;
 import com.example.rest.Rest.service.UserService;
-import com.example.rest.Rest.web.model.UpsertUserRequest;
-import com.example.rest.Rest.web.model.UserListResponse;
-import com.example.rest.Rest.web.model.UserResponse;
+import com.example.rest.Rest.web.model.PaginationRequest;
+import com.example.rest.Rest.web.model.user.UpsertUserRequest;
+import com.example.rest.Rest.web.model.user.UserListResponse;
+import com.example.rest.Rest.web.model.user.UserResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +23,8 @@ public class UserControllerV1 {
     private final UserMapper userMapper;
 
     @GetMapping
-    public ResponseEntity<UserListResponse> findAll(){
-        return ResponseEntity.ok(userMapper.userListToResponse(userService.findAll()));
+    public ResponseEntity<UserListResponse> findAll(@Valid PaginationRequest request){
+        return ResponseEntity.ok(userMapper.userListToResponse(userService.findAll(request)));
     }
 
     @GetMapping("/{id}")

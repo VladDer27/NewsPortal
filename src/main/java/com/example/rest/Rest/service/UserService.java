@@ -1,13 +1,13 @@
 package com.example.rest.Rest.service;
 
 import com.example.rest.Rest.model.User;
+import com.example.rest.Rest.web.model.PaginationRequest;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UserService {
 
-    List<User> findAll();
+    List<User> findAll(PaginationRequest request);
 
     User findById(Long id);
 

@@ -4,7 +4,9 @@ import com.example.rest.Rest.exception.EntityNotFoundException;
 import com.example.rest.Rest.model.User;
 import com.example.rest.Rest.repository.DatabaseUserRepository;
 import com.example.rest.Rest.utils.BeanUtils;
+import com.example.rest.Rest.web.model.PaginationRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
@@ -17,8 +19,8 @@ public class DatabaseUserService implements UserService{
     private final DatabaseUserRepository userRepository;
 
     @Override
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public List<User> findAll(PaginationRequest request) {
+        return userRepository.findAll(PageRequest.of(request.getPageNumber(), request.getPageSize())).getContent();
     }
 
     @Override

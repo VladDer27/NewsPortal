@@ -1,9 +1,9 @@
 package com.example.rest.Rest.mapper;
 
 import com.example.rest.Rest.model.User;
-import com.example.rest.Rest.web.model.UpsertUserRequest;
-import com.example.rest.Rest.web.model.UserListResponse;
-import com.example.rest.Rest.web.model.UserResponse;
+import com.example.rest.Rest.web.model.user.UpsertUserRequest;
+import com.example.rest.Rest.web.model.user.UserListResponse;
+import com.example.rest.Rest.web.model.user.UserResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;

@@ -1,4 +1,4 @@
-package com.example.rest.Rest.web.model;
+package com.example.rest.Rest.web.model.user;
 
 import lombok.Data;
 
