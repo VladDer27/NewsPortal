@@ -11,8 +11,9 @@ import lombok.NoArgsConstructor;
 @FilterValid
 public class PaginationRequest {
 
-    private Integer pageSize;
+    private Integer pageSize = 10;
 
-    private Integer pageNumber;
+
+    private Integer pageNumber = 0;
 
 }

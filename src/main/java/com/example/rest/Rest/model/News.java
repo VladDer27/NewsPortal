@@ -20,6 +20,10 @@ public class News {
     @JoinColumn(name = "user_id")
     @ToString.Exclude
     private User user;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    @ToString.Exclude
+    private Category category;
     private String title;
     @Column(name = "news_body")
     private String newsBody;
