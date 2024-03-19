@@ -1,8 +1,9 @@
 package com.example.rest.Rest.validation;
 
 
-import javax.validation.Constraint;
-import javax.validation.Payload;
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
+
 import java.lang.annotation.*;
 
 @Documented
@@ -11,7 +12,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface FilterValid {
 
-    String message() default "Поля пагинации должны быть указаны!";
+    String message() default "Поля пагинации должны быть указаны верно! pageSize должно быть больше 0, pageNumber должно быть положительным!";
 
     Class<?>[] groups() default {};
 

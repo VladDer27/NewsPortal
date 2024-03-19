@@ -3,18 +3,15 @@ package com.example.rest.Rest.web.controller.v1;
 import com.example.rest.Rest.mapper.UserMapper;
 import com.example.rest.Rest.model.User;
 import com.example.rest.Rest.service.UserService;
-import com.example.rest.Rest.validation.FilterValid;
 import com.example.rest.Rest.web.model.PaginationRequest;
 import com.example.rest.Rest.web.model.user.UpsertUserRequest;
 import com.example.rest.Rest.web.model.user.UserListResponse;
 import com.example.rest.Rest.web.model.user.UserResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.Filter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 @RestController
 @RequestMapping("api/v1/user")

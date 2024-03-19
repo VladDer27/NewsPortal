@@ -7,13 +7,13 @@ import com.example.rest.Rest.web.model.PaginationRequest;
 import com.example.rest.Rest.web.model.category.CategoryListResponse;
 import com.example.rest.Rest.web.model.category.CategoryResponse;
 import com.example.rest.Rest.web.model.category.UpsertCategoryRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 
 @Controller
 @RequiredArgsConstructor
