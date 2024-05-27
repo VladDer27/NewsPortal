@@ -11,3 +11,6 @@ spring:
       connection-timeout: 10000
   main:
     allow-circular-references: true
+security:
+  jwt:
+    secret-key: whatislove

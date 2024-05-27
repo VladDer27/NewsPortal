@@ -31,6 +31,11 @@ public class DatabaseUserService implements UserService{
     }
 
     @Override
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email).orElse(null);
+    }
+
+    @Override
     public User save(User user) {
         if (userRepository.existsUserByEmail(user.getEmail())){
             throw new AlreadyExistException(MessageFormat.

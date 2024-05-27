@@ -1,5 +1,6 @@
 package com.example.rest.Rest.model;
 
+import com.example.rest.Rest.utils.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,6 +25,9 @@ public class User {
     private String email;
 
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @ToString.Exclude
