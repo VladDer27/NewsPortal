@@ -1,5 +1,6 @@
 package com.example.rest.Rest.service;
 
+import com.example.rest.Rest.exception.AlreadyExistException;
 import com.example.rest.Rest.exception.EntityNotFoundException;
 import com.example.rest.Rest.model.User;
 import com.example.rest.Rest.repository.DatabaseUserRepository;
@@ -31,11 +32,27 @@ public class DatabaseUserService implements UserService{
 
     @Override
     public User save(User user) {
+        if (userRepository.existsUserByEmail(user.getEmail())){
+            throw new AlreadyExistException(MessageFormat.
+                    format("Пользователь с почтой: {0} уже зарегистрирован!", user.getEmail()));
+        }
+        else if (userRepository.existsUserByNickname(user.getNickname())){
+            throw new AlreadyExistException(MessageFormat.
+                    format("Пользователь с ником: {0} уже зарегистрирован!", user.getNickname()));
+        }
         return userRepository.save(user);
     }
 
     @Override
     public User update(User user) {
+        if (userRepository.existsUserByEmail(user.getEmail())){
+            throw new AlreadyExistException(MessageFormat.
+                    format("Пользователь с почтой: {0} уже зарегистрирован!", user.getEmail()));
+        }
+        else if (userRepository.existsUserByNickname(user.getNickname())){
+            throw new AlreadyExistException(MessageFormat.
+                    format("Пользователь с ником: {0} уже зарегистрирован!", user.getNickname()));
+        }
         User existedUser = findById(user.getId());
         BeanUtils.copyNonNullProperties(user, existedUser);
         return userRepository.save(user);

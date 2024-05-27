@@ -1,5 +1,6 @@
 package com.example.rest.Rest.service;
 
+import com.example.rest.Rest.exception.AlreadyExistException;
 import com.example.rest.Rest.exception.EntityNotFoundException;
 import com.example.rest.Rest.model.Category;
 import com.example.rest.Rest.repository.DatabaseCategoryRepository;
@@ -32,11 +33,17 @@ public class DatabaseCategoryService implements CategoryService{
 
     @Override
     public Category save(Category category) {
+        if(categoryRepository.existsCategoryByName(category.getName())){
+            throw new AlreadyExistException(MessageFormat.format("Категория с именем: {0} уже существует!", category.getName()));
+        }
         return categoryRepository.save(category);
     }
 
     @Override
     public Category update(Category category) {
+        if(categoryRepository.existsCategoryByName(category.getName())){
+            throw new AlreadyExistException(MessageFormat.format("Категория с именем: {0} уже существует!", category.getName()));
+        }
         Category existedCategory = findById(category.getId());
         BeanUtils.copyNonNullProperties(category, existedCategory);
         return categoryRepository.save(existedCategory);

@@ -1,12 +1,14 @@
 package com.example.rest.Rest.service;
 
+import com.example.rest.Rest.exception.AlreadyExistException;
 import com.example.rest.Rest.exception.EntityNotFoundException;
 import com.example.rest.Rest.model.Category;
 import com.example.rest.Rest.model.News;
 import com.example.rest.Rest.model.User;
 import com.example.rest.Rest.repository.DatabaseNewsRepository;
+import com.example.rest.Rest.repository.NewsSpecification;
 import com.example.rest.Rest.utils.BeanUtils;
-import com.example.rest.Rest.web.model.PaginationRequest;
+import com.example.rest.Rest.web.model.news.NewsFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -26,8 +28,9 @@ public class DatabaseNewsService implements NewsService {
 
 
     @Override
-    public List<News> findAll(PaginationRequest request) {
-        return newsRepository.findAll(PageRequest.of(request.getPageNumber(), request.getPageSize())).getContent();
+    public List<News> findAll(NewsFilter filter) {
+        return newsRepository.findAll(NewsSpecification.withFilter(filter),
+                PageRequest.of(filter.getPageNumber(), filter.getPageSize())).getContent();
     }
 
     @Override
@@ -38,6 +41,9 @@ public class DatabaseNewsService implements NewsService {
 
     @Override
     public News save(News news) {
+        if(newsRepository.existsNewsByNewsBody(news.getNewsBody())){
+            throw new AlreadyExistException("Такая новость уже существует!");
+        }
         User user = userService.findById(news.getUser().getId());
         Category category = categoryService.findById(news.getCategory().getId());
         news.setUser(user);
@@ -47,6 +53,9 @@ public class DatabaseNewsService implements NewsService {
 
     @Override
     public News update(News news) {
+        if(newsRepository.existsNewsByNewsBody(news.getNewsBody())){
+            throw new AlreadyExistException("Такая новость уже существует!");
+        }
         User user = userService.findById(news.getUser().getId());
         Category category = categoryService.findById(news.getCategory().getId());
         News existedNews = findById(news.getId());

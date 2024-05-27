@@ -33,7 +33,7 @@ public class UserControllerV1 {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<UserResponse> create(@RequestBody UpsertUserRequest request){
+    public ResponseEntity<UserResponse> create(@RequestBody @Valid UpsertUserRequest request){
         User newUser = userService.save(userMapper.requestToUser(request));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(userMapper.userToResponse(newUser));

@@ -33,7 +33,7 @@ public class CategoryControllerV1 {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<CategoryResponse> create(@RequestBody UpsertCategoryRequest request){
+    public ResponseEntity<CategoryResponse> create(@RequestBody @Valid UpsertCategoryRequest request){
         Category newCategory = categoryService.save(mapper.requestToCategory(request));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(mapper.categoryToResponse(newCategory));

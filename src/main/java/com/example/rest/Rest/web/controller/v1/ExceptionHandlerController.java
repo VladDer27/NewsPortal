@@ -1,5 +1,6 @@
 package com.example.rest.Rest.web.controller.v1;
 
+import com.example.rest.Rest.exception.AlreadyExistException;
 import com.example.rest.Rest.exception.EntityNotFoundException;
 import com.example.rest.Rest.web.model.ErrorResponse;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -23,6 +24,13 @@ public class ExceptionHandlerController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(new ErrorResponse(ex.getMessage()));
 
+    }
+
+    @ExceptionHandler(AlreadyExistException.class)
+    public ResponseEntity<ErrorResponse> alreadyExists(AlreadyExistException exception){
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ErrorResponse(exception.getMessage()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
