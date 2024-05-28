@@ -32,6 +32,9 @@ public class SecurityConfig {
                 .securityMatcher("/**")
                 .authorizeHttpRequests(registry -> registry
                         .requestMatchers("/api/v1/auth/**").permitAll()
+                        .requestMatchers("/api/v1/news/**").authenticated()
+                        .requestMatchers("/api/v1/user/**").hasRole("ADMIN")
+                        .requestMatchers("/api/v1/category/**").hasRole("ADMIN")
                         .anyRequest().permitAll());
         return http.build();
     }

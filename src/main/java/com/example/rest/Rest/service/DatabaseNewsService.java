@@ -44,9 +44,7 @@ public class DatabaseNewsService implements NewsService {
         if(newsRepository.existsNewsByNewsBody(news.getNewsBody())){
             throw new AlreadyExistException("Такая новость уже существует!");
         }
-        User user = userService.findById(news.getUser().getId());
         Category category = categoryService.findById(news.getCategory().getId());
-        news.setUser(user);
         news.setCategory(category);
         return newsRepository.save(news);
     }
@@ -62,7 +60,6 @@ public class DatabaseNewsService implements NewsService {
 
         BeanUtils.copyNonNullProperties(news, existedNews);
         existedNews.setCategory(category);
-        existedNews.setUser(user);
         return newsRepository.save(existedNews);
     }
 

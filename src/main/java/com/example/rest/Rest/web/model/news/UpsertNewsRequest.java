@@ -16,8 +16,5 @@ public class UpsertNewsRequest {
     private String newsBody;
 
     @NotNull
-    private Long userId;
-
-    @NotNull
     private Long categoryId;
 }

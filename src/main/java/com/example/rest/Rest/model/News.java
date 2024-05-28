@@ -39,5 +39,4 @@ public class News {
 
     @UpdateTimestamp
     private Instant updatedAt;
-
 }
