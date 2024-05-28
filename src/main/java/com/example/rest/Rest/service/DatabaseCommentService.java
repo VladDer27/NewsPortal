@@ -1,14 +1,11 @@
 package com.example.rest.Rest.service;
 
 import com.example.rest.Rest.exception.EntityNotFoundException;
-import com.example.rest.Rest.model.Category;
 import com.example.rest.Rest.model.Comment;
 import com.example.rest.Rest.model.News;
 import com.example.rest.Rest.repository.DatabaseCommentRepository;
 import com.example.rest.Rest.utils.BeanUtils;
-import com.example.rest.Rest.web.model.PaginationRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
@@ -20,13 +17,11 @@ public class DatabaseCommentService implements CommentService{
 
     private final DatabaseCommentRepository commentRepository;
 
-    private final UserService userService;
-
     private final NewsService newsService;
 
     @Override
-    public List<Comment> findAll(PaginationRequest request) {
-        return commentRepository.findAll(PageRequest.of(request.getPageNumber(), request.getPageSize())).getContent();
+    public List<Comment> findAllByNewsId(Long newsId) {
+        return commentRepository.findAllByNews_Id(newsId);
     }
 
     @Override

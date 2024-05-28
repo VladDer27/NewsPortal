@@ -5,7 +5,6 @@ import com.example.rest.Rest.model.Comment;
 import com.example.rest.Rest.security.UserPrincipal;
 import com.example.rest.Rest.service.CommentService;
 import com.example.rest.Rest.service.UserService;
-import com.example.rest.Rest.web.model.PaginationRequest;
 import com.example.rest.Rest.web.model.comment.CommentListResponse;
 import com.example.rest.Rest.web.model.comment.CommentResponse;
 import com.example.rest.Rest.web.model.comment.UpsertCommentRequest;
@@ -28,8 +27,8 @@ public class CommentControllerV1 {
     private final UserService userService;
 
     @GetMapping
-    public ResponseEntity<CommentListResponse> findAll(@Valid PaginationRequest request){
-        return ResponseEntity.ok(commentMapper.commentListToResponse(commentService.findAll(request)));
+    public ResponseEntity<CommentListResponse> findAll(@RequestParam Long newsId){
+        return ResponseEntity.ok(commentMapper.commentListToResponse(commentService.findAllByNewsId(newsId)));
     }
 
     @GetMapping("/{id}")

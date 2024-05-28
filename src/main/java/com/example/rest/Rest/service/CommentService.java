@@ -1,13 +1,12 @@
 package com.example.rest.Rest.service;
 
 import com.example.rest.Rest.model.Comment;
-import com.example.rest.Rest.web.model.PaginationRequest;
 
 import java.util.List;
 
 public interface CommentService {
 
-    List<Comment> findAll(PaginationRequest request);
+    List<Comment> findAllByNewsId(Long newsId);
 
     Comment findById(Long id);
 
