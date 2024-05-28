@@ -33,4 +33,8 @@ public class User {
     @ToString.Exclude
     @Builder.Default
     private List<News> news = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private List<Comment> comments = new ArrayList<>();
 }

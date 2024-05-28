@@ -47,10 +47,13 @@ public class NewsControllerV1 {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<NewsResponse> update(@PathVariable Long id, @RequestBody UpsertNewsRequest request){
-        News updatedNews = newsService.update(mapper.requestToNewsWithId(id, request));
+    public ResponseEntity<NewsResponse> update(@PathVariable Long id, @RequestBody UpsertNewsRequest request,
+                                               @AuthenticationPrincipal UserPrincipal principal){
+        News updatedNews = mapper.requestToNews(request);
+        updatedNews.setUser(userService.findById(principal.getUserId()));
 
-        return ResponseEntity.ok().body(mapper.newsToResponse(updatedNews));
+        return ResponseEntity.ok().body(mapper.newsToResponse(
+                newsService.update(mapper.requestToNewsWithId(id, request))));
     }
 
     @DeleteMapping("/{id}")

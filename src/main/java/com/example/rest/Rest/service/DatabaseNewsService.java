@@ -54,7 +54,6 @@ public class DatabaseNewsService implements NewsService {
         if(newsRepository.existsNewsByNewsBody(news.getNewsBody())){
             throw new AlreadyExistException("Такая новость уже существует!");
         }
-        User user = userService.findById(news.getUser().getId());
         Category category = categoryService.findById(news.getCategory().getId());
         News existedNews = findById(news.getId());
 
