@@ -35,6 +35,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/news/**").authenticated()
                         .requestMatchers("/api/v1/user/**").hasRole("ADMIN")
                         .requestMatchers("/api/v1/category/**").hasRole("ADMIN")
+                        .requestMatchers("/api/v1/comment/**").authenticated()
                         .anyRequest().permitAll());
         return http.build();
     }

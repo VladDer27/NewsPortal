@@ -2,15 +2,11 @@ package com.example.rest.Rest.mapper;
 
 import com.example.rest.Rest.model.News;
 import com.example.rest.Rest.service.CategoryService;
-import com.example.rest.Rest.service.UserService;
 import com.example.rest.Rest.web.model.news.NewsResponse;
 import com.example.rest.Rest.web.model.news.UpsertNewsRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class NewsMapperDelegate implements NewsMapper {
-
-    @Autowired
-    private UserService userService;
 
     @Autowired
     private CategoryService categoryService;
