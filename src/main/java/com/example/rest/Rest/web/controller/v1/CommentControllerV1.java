@@ -2,7 +2,6 @@ package com.example.rest.Rest.web.controller.v1;
 
 import com.example.rest.Rest.mapper.CommentMapper;
 import com.example.rest.Rest.model.Comment;
-import com.example.rest.Rest.model.News;
 import com.example.rest.Rest.security.UserPrincipal;
 import com.example.rest.Rest.service.CommentService;
 import com.example.rest.Rest.service.UserService;
@@ -10,8 +9,6 @@ import com.example.rest.Rest.web.model.PaginationRequest;
 import com.example.rest.Rest.web.model.comment.CommentListResponse;
 import com.example.rest.Rest.web.model.comment.CommentResponse;
 import com.example.rest.Rest.web.model.comment.UpsertCommentRequest;
-import com.example.rest.Rest.web.model.news.NewsResponse;
-import com.example.rest.Rest.web.model.news.UpsertNewsRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

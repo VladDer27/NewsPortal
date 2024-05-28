@@ -5,7 +5,6 @@ import com.example.rest.Rest.service.CategoryService;
 import com.example.rest.Rest.service.NewsService;
 import com.example.rest.Rest.web.model.comment.CommentResponse;
 import com.example.rest.Rest.web.model.comment.UpsertCommentRequest;
-import com.example.rest.Rest.web.model.news.NewsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 
 abstract public class CommentMapperDelegate implements CommentMapper{

@@ -1,15 +1,13 @@
 package com.example.rest.Rest.web.controller.v1;
 
+import com.example.rest.Rest.mapper.CommentMapper;
 import com.example.rest.Rest.mapper.NewsMapper;
 import com.example.rest.Rest.model.News;
 import com.example.rest.Rest.model.User;
 import com.example.rest.Rest.security.UserPrincipal;
 import com.example.rest.Rest.service.NewsService;
 import com.example.rest.Rest.service.UserService;
-import com.example.rest.Rest.web.model.news.NewsFilter;
-import com.example.rest.Rest.web.model.news.NewsListResponse;
-import com.example.rest.Rest.web.model.news.NewsResponse;
-import com.example.rest.Rest.web.model.news.UpsertNewsRequest;
+import com.example.rest.Rest.web.model.news.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,6 +23,8 @@ import org.springframework.web.bind.annotation.*;
 public class NewsControllerV1 {
 
     private final NewsService newsService;
+
+    private final CommentMapper commentMapper;
     private final NewsMapper mapper;
 
     private final UserService userService;
@@ -34,8 +34,8 @@ public class NewsControllerV1 {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<NewsResponse> findById(@PathVariable Long id){
-        return ResponseEntity.ok(mapper.newsToResponse(newsService.findById(id)));
+    public ResponseEntity<NewsByIdResponse> findById(@PathVariable Long id){
+        return ResponseEntity.ok(mapper.newsByIdToResponse(newsService.findById(id)));
     }
 
     @PostMapping("/create")
