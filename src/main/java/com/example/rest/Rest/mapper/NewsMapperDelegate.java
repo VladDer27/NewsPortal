@@ -43,6 +43,7 @@ public abstract class NewsMapperDelegate implements NewsMapper {
         response.setNewsBody(news.getNewsBody());
         response.setCreatedAt(news.getCreatedAt());
         response.setUpdatedAt(news.getUpdatedAt());
+        response.setCommentsCount(news.getComments().size());
         return response;
     }
 }

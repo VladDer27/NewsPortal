@@ -21,4 +21,6 @@ public class NewsResponse {
 
     private String categoryName;
 
+    private Integer commentsCount;
+
 }
