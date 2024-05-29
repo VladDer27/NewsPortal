@@ -1,5 +1,6 @@
 package com.example.rest.Rest.web.controller.v1;
 
+import com.example.rest.Rest.AOP.CheckCommentOwnership;
 import com.example.rest.Rest.mapper.CommentMapper;
 import com.example.rest.Rest.model.Comment;
 import com.example.rest.Rest.security.UserPrincipal;
@@ -45,6 +46,7 @@ public class CommentControllerV1 {
     }
 
     @PutMapping("/{id}")
+    @CheckCommentOwnership
     public ResponseEntity<CommentResponse> update(@PathVariable Long id, @RequestBody UpsertCommentRequest request,
                                                @AuthenticationPrincipal UserPrincipal principal){
         Comment updatedComment = commentMapper.requestToComment(request);
@@ -55,6 +57,7 @@ public class CommentControllerV1 {
     }
 
     @DeleteMapping("/{id}")
+    @CheckCommentOwnership
     public ResponseEntity<Void> delete(@PathVariable Long id){
         commentService.deleteById(id);
 

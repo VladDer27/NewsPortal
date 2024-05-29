@@ -33,6 +33,13 @@ public class ExceptionHandlerController {
                 .body(new ErrorResponse(exception.getMessage()));
     }
 
+    @ExceptionHandler(SecurityException.class)
+    public ResponseEntity<ErrorResponse> noPermission(SecurityException exception){
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).
+                body(new ErrorResponse(exception.getMessage()));
+    }
+    
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleValidationExceptions(MethodArgumentNotValidException ex) {
         BindingResult bindingResult = ex.getBindingResult();
