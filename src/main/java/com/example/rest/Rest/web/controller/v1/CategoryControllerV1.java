@@ -11,6 +11,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,6 +34,7 @@ public class CategoryControllerV1 {
     }
 
     @PostMapping("/create")
+    @PreAuthorize("hasAnyRole('ADMIN', 'MODERATOR')")
     public ResponseEntity<CategoryResponse> create(@RequestBody @Valid UpsertCategoryRequest request){
         Category newCategory = categoryService.save(mapper.requestToCategory(request));
 
@@ -40,6 +42,7 @@ public class CategoryControllerV1 {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('MODERATOR', 'ADMIN')")
     public ResponseEntity<CategoryResponse> update(@PathVariable Long id, @RequestBody UpsertCategoryRequest request){
         Category updatedCategory = categoryService.update(mapper.requestToCategoryWithId(id, request));
 
@@ -47,6 +50,7 @@ public class CategoryControllerV1 {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'MODERATOR')")
     public ResponseEntity<Void> delete(@PathVariable Long id){
         categoryService.deleteById(id);
 
