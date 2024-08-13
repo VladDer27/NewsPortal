@@ -1,6 +1,7 @@
 package com.example.rest.Rest.web.controller.v1;
 
 import com.example.rest.Rest.AOP.CheckNewsOwnership;
+import com.example.rest.Rest.AOP.CheckUsersNews;
 import com.example.rest.Rest.mapper.NewsMapper;
 import com.example.rest.Rest.model.News;
 import com.example.rest.Rest.security.UserPrincipal;
@@ -55,7 +56,7 @@ public class NewsControllerV1 {
     }
 
     @DeleteMapping("/{id}")
-    @CheckNewsOwnership
+    @CheckUsersNews
     public ResponseEntity<Void> delete(@PathVariable Long id){
         newsService.deleteById(id);
 
