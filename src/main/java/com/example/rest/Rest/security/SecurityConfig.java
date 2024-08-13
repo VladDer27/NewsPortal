@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -15,6 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @RequiredArgsConstructor
 public class SecurityConfig {
 
@@ -32,12 +34,7 @@ public class SecurityConfig {
                 .securityMatcher("/**")
                 .authorizeHttpRequests(registry -> registry
                         .requestMatchers("/api/v1/auth/**").permitAll()
-                        .requestMatchers("/api/v1/news/**").authenticated()
-                        .requestMatchers("/api/v1/user/**").hasRole("ADMIN")
-                        .requestMatchers("/api/v1/category").authenticated()
-                        .requestMatchers("/api/v1/category/**").hasRole("ADMIN")
-                        .requestMatchers("/api/v1/comment/**").authenticated()
-                        .anyRequest().permitAll());
+                        .anyRequest().authenticated());
         return http.build();
     }
 

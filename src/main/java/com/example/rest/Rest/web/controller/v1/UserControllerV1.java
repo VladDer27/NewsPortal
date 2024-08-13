@@ -1,5 +1,6 @@
 package com.example.rest.Rest.web.controller.v1;
 
+import com.example.rest.Rest.AOP.CheckUserAccess;
 import com.example.rest.Rest.mapper.UserMapper;
 import com.example.rest.Rest.model.User;
 import com.example.rest.Rest.service.UserService;
@@ -11,7 +12,10 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 
 @RestController
 @RequestMapping("api/v1/user")
@@ -23,23 +27,20 @@ public class UserControllerV1 {
     private final UserMapper userMapper;
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<UserListResponse> findAll(@Valid PaginationRequest request){
         return ResponseEntity.ok(userMapper.userListToResponse(userService.findAll(request)));
     }
 
     @GetMapping("/{id}")
+    @CheckUserAccess
     public ResponseEntity<UserResponse> findById(@PathVariable Long id){
         return ResponseEntity.ok(userMapper.userToResponse(userService.findById(id)));
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<UserResponse> create(@RequestBody @Valid UpsertUserRequest request){
-        User newUser = userService.save(userMapper.requestToUser(request));
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(userMapper.userToResponse(newUser));
-    }
 
     @PutMapping("/{id}")
+    @CheckUserAccess
     public ResponseEntity<UserResponse> update(@PathVariable Long id, @RequestBody UpsertUserRequest request){
         User updatedUser = userService.update(userMapper.requestToUserWithId(id, request));
 
@@ -47,6 +48,7 @@ public class UserControllerV1 {
     }
 
     @DeleteMapping("/{id}")
+    @CheckUserAccess
     public ResponseEntity<Void> delete(@PathVariable Long id){
         userService.deleteById(id);
 
